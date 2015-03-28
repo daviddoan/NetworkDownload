@@ -6,5 +6,6 @@ Downloading "http://web.mit.edu/21w.789/www/papers/griswold2004.pdf" and measuri
 1. Latency (ms)
 2. Average Speed (bytes/s)
 
-Heavily supported by https://medium.com/swift-programming/learn-nsurlsession-using-swift-part-2-background-download-863426842e21
+Resources consulted:
+https://medium.com/swift-programming/learn-nsurlsession-using-swift-part-2-background-download-863426842e21
 
