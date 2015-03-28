@@ -48,10 +48,10 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
             latTimer.invalidate()
         }
         
-        if dlTimerCount % 1000 == 0 {
-            throughput.append(bytesWritten)
+        if dlTimerCount % 1000 >= 900 {
+            throughput.append(totalBytesWritten)
         }
-
+        
         println("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
        
         filesize = totalBytesExpectedToWrite
@@ -68,7 +68,16 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
             dlTimer.invalidate()
             println("session \(session) download completed")
             ViewController().exportToCSV(self)
-            throughput = [Int]()
+            throughputcalc.append(throughput[0])
+            for var i = 1; i < throughput.count; i++ {
+                throughputcalc.append(throughput[i] - throughput[i-1])
+            }
+            println(throughput)
+            println(throughputcalc)
+            println(dlTimerCount)
+            
+            throughput.removeAll()
+            throughputcalc.removeAll()
         } else {
             println("session \(session) download failed with error \(error?.localizedDescription)")
         }

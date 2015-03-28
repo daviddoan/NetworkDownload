@@ -11,6 +11,7 @@ import UIKit
 var dlTimer = NSTimer()
 var latTimer = NSTimer()
 var throughput = [Int]()
+var throughputcalc = [Int]()
 var dlTimerCount = 0
 var latTimerCount = 0
 var dlTimerRunning = false
