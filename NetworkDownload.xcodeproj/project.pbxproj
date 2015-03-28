@@ -13,6 +13,8 @@
 		441DC44C1AC669A4003FAD0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 441DC44B1AC669A4003FAD0E /* Images.xcassets */; };
 		441DC44F1AC669A4003FAD0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 441DC44D1AC669A4003FAD0E /* LaunchScreen.xib */; };
 		441DC45B1AC669A4003FAD0E /* NetworkDownloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441DC45A1AC669A4003FAD0E /* NetworkDownloadTests.swift */; };
+		441DC4651AC66A6E003FAD0E /* NetworkDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441DC4641AC66A6E003FAD0E /* NetworkDownload.swift */; };
+		441DC4671AC66A99003FAD0E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441DC4661AC66A99003FAD0E /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		441DC4541AC669A4003FAD0E /* NetworkDownloadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkDownloadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		441DC4591AC669A4003FAD0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441DC45A1AC669A4003FAD0E /* NetworkDownloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadTests.swift; sourceTree = "<group>"; };
+		441DC4641AC66A6E003FAD0E /* NetworkDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDownload.swift; sourceTree = "<group>"; };
+		441DC4661AC66A99003FAD0E /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +81,9 @@
 		441DC4411AC669A3003FAD0E /* NetworkDownload */ = {
 			isa = PBXGroup;
 			children = (
+				441DC4661AC66A99003FAD0E /* Data.swift */,
 				441DC4441AC669A3003FAD0E /* AppDelegate.swift */,
+				441DC4641AC66A6E003FAD0E /* NetworkDownload.swift */,
 				441DC4461AC669A3003FAD0E /* ViewController.swift */,
 				441DC4481AC669A4003FAD0E /* Main.storyboard */,
 				441DC44B1AC669A4003FAD0E /* Images.xcassets */,
@@ -161,6 +167,11 @@
 				TargetAttributes = {
 					441DC43E1AC669A3003FAD0E = {
 						CreatedOnToolsVersion = 6.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					441DC4531AC669A4003FAD0E = {
 						CreatedOnToolsVersion = 6.2;
@@ -213,7 +224,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				441DC4471AC669A3003FAD0E /* ViewController.swift in Sources */,
+				441DC4651AC66A6E003FAD0E /* NetworkDownload.swift in Sources */,
 				441DC4451AC669A3003FAD0E /* AppDelegate.swift in Sources */,
+				441DC4671AC66A99003FAD0E /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
