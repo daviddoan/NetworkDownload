@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import UIKit
+import Darwin
 
 typealias CompleteHandlerBlock = () -> ()
 
-class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate, UIDocumentInteractionControllerDelegate {
     
     var handlerQueue: [String : CompleteHandlerBlock]!
     
@@ -40,14 +42,24 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
         println("session \(session) has finished the download task \(downloadTask) of URL \(location).")
     }
     
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
+       
         if bytesWritten > 0 {
             latTimer.invalidate()
         }
+        
+        if dlTimerCount % 1000 == 0 {
+            throughput.append(bytesWritten)
+        }
+
         println("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
-    }
+       
+        filesize = totalBytesExpectedToWrite
+
+        }
     
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int, expectedTotalBytes: Int) {
         println("session \(session) download task \(downloadTask) resumed at offset \(fileOffset) bytes out of an expected \(expectedTotalBytes) bytes.")
     }
     
@@ -55,7 +67,8 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
         if error == nil {
             dlTimer.invalidate()
             println("session \(session) download completed")
-            
+            ViewController().exportToCSV(self)
+            throughput = [Int]()
         } else {
             println("session \(session) download failed with error \(error?.localizedDescription)")
         }
@@ -69,6 +82,7 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
         }
     }
     
+        
     //MARK: completion handler
     func addCompletionHandler(handler: CompleteHandlerBlock, identifier: String) {
         handlerQueue[identifier] = handler

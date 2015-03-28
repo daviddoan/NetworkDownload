@@ -7,6 +7,7 @@
 //
 
 import Foundation
+var download = "http://web.mit.edu/21w.789/www/papers/griswold2004.pdf"
 
 struct SessionProperties {
     static let identifier : String! = "url_session_background_download"
@@ -14,7 +15,7 @@ struct SessionProperties {
 
 func getData() -> Array<String> {
     var data : [String] = [
-        "http://web.mit.edu/21w.789/www/papers/griswold2004.pdf"
+        "http://www.nbb.be/DOC/BA/PDF7MB/2012/201201500019-1.PDF"
     ]
     
     return data

@@ -10,12 +10,16 @@ import UIKit
 
 var dlTimer = NSTimer()
 var latTimer = NSTimer()
+var throughput = [Int]()
+var dlTimerCount = 0
+var latTimerCount = 0
+var dlTimerRunning = false
+var latTimerRunning = false
 
-class ViewController: UIViewController {
-    var dlTimerCount = 0
-    var latTimerCount = 0
-    var dlTimerRunning = false
-    var latTimerRunning = false
+var filesize = 0
+
+class ViewController: UIViewController, UIDocumentInteractionControllerDelegate {
+
     
     @IBOutlet weak var latText: UILabel!
     @IBOutlet weak var dlText: UILabel!
@@ -23,6 +27,25 @@ class ViewController: UIViewController {
     
     var delegate = NetworkDownload.sharedInstance
     
+    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController! {
+        return self
+    }
+    
+    func exportToCSV(delegate: UIDocumentInteractionControllerDelegate) {
+        let fileName = NSTemporaryDirectory().stringByAppendingPathComponent("throughput.csv")
+        let url: NSURL! = NSURL(fileURLWithPath: fileName)
+        
+        var data = ",\n".join(throughput.map { "\($0)" })
+        
+        data.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        if url != nil {
+            let documentController = UIDocumentInteractionController(URL: url)
+            documentController.UTI = "public.comma-separated-values-text"
+            documentController.delegate = delegate
+            documentController.presentPreviewAnimated(true)
+        }
+    }
+
     //MARK: NSURLSession download in background
     func download(data: [String]!) {
         var configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)
@@ -34,9 +57,9 @@ class ViewController: UIViewController {
         //        }
     }
     
-    func dlCounting() {
+    func dlCounting(){
         dlTimerCount += 1
-        var speed = 650924 / (dlTimerCount)
+        var speed = filesize / (dlTimerCount)
         dlText.text = "\(speed*1000) bytes/s"
     }
     
@@ -67,7 +90,8 @@ class ViewController: UIViewController {
         
         var data = getData()
         download(data)
+        
     }
-    
+
 }
 

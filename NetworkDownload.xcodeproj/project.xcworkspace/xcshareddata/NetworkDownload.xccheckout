@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>913338A7-D858-4B57-8A41-4F4CF6FAAA12</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NetworkDownload</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B3EFB8226A972DD9E5E63190DBE743B861359BC1</key>
+		<string>https://github.com/daviddoan/NetworkDownload.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NetworkDownload.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B3EFB8226A972DD9E5E63190DBE743B861359BC1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/daviddoan/NetworkDownload.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B3EFB8226A972DD9E5E63190DBE743B861359BC1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B3EFB8226A972DD9E5E63190DBE743B861359BC1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NetworkDownload</string>
+		</dict>
+	</array>
+</dict>
+</plist>
