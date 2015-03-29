@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
     
     
     var delegate = NetworkDownload.sharedInstance
-    
+   
     func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController! {
         return self
     }
