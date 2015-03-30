@@ -44,7 +44,8 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
     func dlCounting(){
         dlTimerCount += 1
         var speed = filesize / (dlTimerCount)
-        dlText.text = "\(speed*1000) bytes/s"
+        dlText.text = "\(speed*100) bytes/s"
+        println(dlTimerCount)
     }
     
     func latCounting() {
@@ -55,7 +56,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
     
     @IBAction func Start(sender: AnyObject) {
         if dlTimerRunning == false {
-            dlTimer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: Selector("dlCounting"), userInfo: nil, repeats: true)
+            dlTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("dlCounting"), userInfo: nil, repeats: true)
             dlTimerRunning = true
             if dlTimerRunning == true {
                 dlTimerCount = 0
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
         }
         
         if latTimerRunning == false {
-            latTimer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: Selector("latCounting"), userInfo: nil, repeats: true)
+            latTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("latCounting"), userInfo: nil, repeats: true)
             latTimerRunning = true
             if latTimerRunning == true {
                 latTimerCount = 0
@@ -86,10 +87,10 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
     }
     
     func exportToCSV(delegate: UIDocumentInteractionControllerDelegate) {
-        let fileName = NSTemporaryDirectory().stringByAppendingPathComponent("throughput.csv")
+        let fileName = NSTemporaryDirectory().stringByAppendingPathComponent("Throughput.csv")
         let url: NSURL! = NSURL(fileURLWithPath: fileName)
         
-        var data = ",\n".join(throughputcalc.map { "\($0)" })
+        var data = ",\n".join(throughputcalc.map {"\($0.0)"})
         
         data.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         if url != nil {

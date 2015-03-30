@@ -53,6 +53,7 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
         let now = NSDate()
         
         println(now.timeIntervalSinceDate(lastCalled))
+    
         if now.timeIntervalSinceDate(lastCalled) < 1 {
             return
         }
