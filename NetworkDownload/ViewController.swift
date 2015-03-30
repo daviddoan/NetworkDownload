@@ -24,29 +24,12 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
     
     @IBOutlet weak var latText: UILabel!
     @IBOutlet weak var dlText: UILabel!
-    
+    @IBAction func showData(sender: AnyObject) {
+        exportToCSV(self)
+    }
     
     var delegate = NetworkDownload.sharedInstance
    
-    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController! {
-        return self
-    }
-    
-    func exportToCSV(delegate: UIDocumentInteractionControllerDelegate) {
-        let fileName = NSTemporaryDirectory().stringByAppendingPathComponent("throughput.csv")
-        let url: NSURL! = NSURL(fileURLWithPath: fileName)
-        
-        var data = ",\n".join(throughput.map { "\($0)" })
-        
-        data.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-        if url != nil {
-            let documentController = UIDocumentInteractionController(URL: url)
-            documentController.UTI = "public.comma-separated-values-text"
-            documentController.delegate = delegate
-            documentController.presentPreviewAnimated(true)
-        }
-    }
-
     //MARK: NSURLSession download in background
     func download(data: [String]!) {
         var configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)
@@ -89,10 +72,34 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
             }
         }
         
+        
+        throughput.removeAll()
+        throughputcalc.removeAll()
+        
         var data = getData()
         download(data)
-        
     }
 
+    
+    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController! {
+        return self
+    }
+    
+    func exportToCSV(delegate: UIDocumentInteractionControllerDelegate) {
+        let fileName = NSTemporaryDirectory().stringByAppendingPathComponent("throughput.csv")
+        let url: NSURL! = NSURL(fileURLWithPath: fileName)
+        
+        var data = ",\n".join(throughputcalc.map { "\($0)" })
+        
+        data.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        if url != nil {
+            let documentController = UIDocumentInteractionController(URL: url)
+            documentController.UTI = "public.comma-separated-values-text"
+            documentController.delegate = delegate
+            documentController.presentPreviewAnimated(true)
+        }
+    }
+
+    
 }
 

@@ -16,6 +16,8 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     
     var handlerQueue: [String : CompleteHandlerBlock]!
     
+    var lastCalled: NSDate = NSDate()
+    
     class var sharedInstance: NetworkDownload {
         struct Static {
             static var instance : NetworkDownload?
@@ -43,15 +45,22 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     }
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
-       
-        if bytesWritten > 0 {
+        
+        if latTimer.valid && bytesWritten > 0 {
             latTimer.invalidate()
         }
         
-        if dlTimerCount % 1000 >= 900 {
-            throughput.append(totalBytesWritten)
+        let now = NSDate()
+        
+        println(now.timeIntervalSinceDate(lastCalled))
+        if now.timeIntervalSinceDate(lastCalled) < 1 {
+            return
         }
         
+        lastCalled = now
+       
+        throughput.append(totalBytesWritten)
+    
         println("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
        
         filesize = totalBytesExpectedToWrite
@@ -67,7 +76,7 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
         if error == nil {
             dlTimer.invalidate()
             println("session \(session) download completed")
-            ViewController().exportToCSV(self)
+
             throughputcalc.append(throughput[0])
             for var i = 1; i < throughput.count; i++ {
                 throughputcalc.append(throughput[i] - throughput[i-1])
@@ -76,8 +85,7 @@ class NetworkDownload : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
             println(throughputcalc)
             println(dlTimerCount)
             
-            throughput.removeAll()
-            throughputcalc.removeAll()
+            
         } else {
             println("session \(session) download failed with error \(error?.localizedDescription)")
         }

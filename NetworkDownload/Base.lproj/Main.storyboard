@@ -50,6 +50,15 @@
                                     <action selector="Start:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CwR-xi-eVm"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaI-gJ-hFD">
+                                <rect key="frame" x="277" y="540" width="39" height="30"/>
+                                <state key="normal" title="Show">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showData:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="x9W-bt-rQt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -63,6 +72,8 @@
                             <constraint firstItem="tkI-J8-GJg" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="SRV-X5-H2x"/>
                             <constraint firstItem="W9n-8G-QlS" firstAttribute="top" secondItem="ih6-8V-tIc" secondAttribute="bottom" constant="100" id="T6u-Yh-E6t"/>
                             <constraint firstItem="W9n-8G-QlS" firstAttribute="top" secondItem="ih6-8V-tIc" secondAttribute="bottom" constant="50" id="VrL-k7-Gd8"/>
+                            <constraint firstItem="yaI-gJ-hFD" firstAttribute="top" secondItem="W9n-8G-QlS" secondAttribute="bottom" constant="76" id="aD3-YI-mWH"/>
+                            <constraint firstAttribute="centerX" secondItem="yaI-gJ-hFD" secondAttribute="centerX" constant="3.5" id="axS-i6-tC7"/>
                             <constraint firstItem="tkI-J8-GJg" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="ckH-Yf-RaF"/>
                             <constraint firstAttribute="centerX" secondItem="ih6-8V-tIc" secondAttribute="centerX" id="jba-nk-wkg"/>
                             <constraint firstItem="ih6-8V-tIc" firstAttribute="top" secondItem="veJ-kX-DVv" secondAttribute="bottom" constant="50" id="pAp-lC-cBo"/>

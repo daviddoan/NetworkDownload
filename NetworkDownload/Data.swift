@@ -15,7 +15,7 @@ struct SessionProperties {
 
 func getData() -> Array<String> {
     var data : [String] = [
-        "http://www.nbb.be/DOC/BA/PDF7MB/2012/201201500019-1.PDF"
+        "http://www.nbb.be/DOC/BA/PDF7MB/2012/201201500019-1.PDF"	
     ]
     
     return data
