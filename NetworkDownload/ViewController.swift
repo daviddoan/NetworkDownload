@@ -50,7 +50,7 @@ class ViewController: UIViewController, UIDocumentInteractionControllerDelegate 
     
     func latCounting() {
         latTimerCount += 1
-        latText.text = "\(latTimerCount) ms"
+        latText.text = "\(latTimerCount*10) ms"
         
     }
     
